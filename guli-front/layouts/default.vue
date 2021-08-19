@@ -6,64 +6,64 @@
         <h1 id="logo">
           <a href="#" title="在线课堂">
             <img
+              alt="在线课堂"
               src="~/assets/img/logo.png"
               width="100%"
-              alt="在线课堂"
             />
           </a>
         </h1>
         <div class="h-r-nsl">
           <ul class="nav">
-            <router-link to="/" tag="li" active-class="current" exact>
+            <router-link active-class="current" exact tag="li" to="/">
               <a>首页</a>
             </router-link>
-            <router-link to="/course" tag="li" active-class="current">
+            <router-link active-class="current" tag="li" to="/course">
               <a>课程</a>
             </router-link>
-            <router-link to="/teacher" tag="li" active-class="current">
+            <router-link active-class="current" tag="li" to="/teacher">
               <a>名师</a>
             </router-link>
-            <router-link to="/article" tag="li" active-class="current">
+            <router-link active-class="current" tag="li" to="/article">
               <a>文章</a>
             </router-link>
-            <router-link to="/qa" tag="li" active-class="current">
+            <router-link active-class="current" tag="li" to="/qa">
               <a>问答</a>
             </router-link>
           </ul>
           <!-- / nav -->
           <ul class="h-r-login">
             <li id="no-login">
-              <a href="/sing_in" title="登录">
+              <a href="/login" title="登录">
                 <em class="icon18 login-icon">&nbsp;</em>
                 <span class="vam ml5">登录</span>
               </a>
               |
-              <a href="/sign_up" title="注册">
+              <a href="/register" title="注册">
                 <span class="vam ml5">注册</span>
               </a>
             </li>
-            <li class="mr10 undis" id="is-login-one">
-              <a href="#" title="消息" id="headerMsgCountId">
+            <li id="is-login-one" class="mr10 undis">
+              <a id="headerMsgCountId" href="#" title="消息">
                 <em class="icon18 news-icon">&nbsp;</em>
               </a>
               <q class="red-point" style="display: none">&nbsp;</q>
             </li>
-            <li class="h-r-user undis" id="is-login-two">
+            <li id="is-login-two" class="h-r-user undis">
               <a href="#" title>
                 <img
+                  alt
+                  class="vam picImg"
+                  height="30"
                   src="~/assets/img/avatar-boy.gif"
                   width="30"
-                  height="30"
-                  class="vam picImg"
-                  alt
                 />
-                <span class="vam disIb" id="userName"></span>
+                <span id="userName" class="vam disIb"></span>
               </a>
               <a
-                href="javascript:void(0)"
-                title="退出"
-                onclick="exit();"
                 class="ml5"
+                href="javascript:void(0)"
+                onclick="exit();"
+                title="退出"
               >退出</a
               >
             </li>
@@ -73,12 +73,12 @@
             <form action="#" method="post">
               <label class="h-r-s-box">
                 <input
-                  type="text"
-                  placeholder="输入你想学的课程"
                   name="queryCourse.courseName"
+                  placeholder="输入你想学的课程"
+                  type="text"
                   value
                 />
-                <button type="submit" class="s-btn">
+                <button class="s-btn" type="submit">
                   <em class="icon18">&nbsp;</em>
                 </button>
               </label>
@@ -104,17 +104,17 @@
           </h4>
           <ul class="of flink-list">
             <li>
-              <a href="http://www.baidu.com/" title="baidu" target="_blank"
+              <a href="http://www.baidu.com/" target="_blank" title="baidu"
               >百度</a
               >
             </li>
             <li>
-              <a href="https://www.icourse163.org/" title="mooc" target="_blank"
+              <a href="https://www.icourse163.org/" target="_blank" title="mooc"
               >慕课</a
               >
             </li>
             <li>
-              <a href="https://ke.qq.com/" title="tx" target="_blank"
+              <a href="https://ke.qq.com/" target="_blank" title="tx"
               >腾讯课堂</a
               >
             </li>
@@ -125,10 +125,10 @@
           <section class="fl col-7">
             <section class="mr20">
               <section class="b-f-link">
-                <a href="#" title="关于我们" target="_blank">关于我们</a>|
-                <a href="#" title="联系我们" target="_blank">联系我们</a>|
-                <a href="#" title="帮助中心" target="_blank">帮助中心</a>|
-                <a href="#" title="资源下载" target="_blank">资源下载</a>|
+                <a href="#" target="_blank" title="关于我们">关于我们</a>|
+                <a href="#" target="_blank" title="联系我们">联系我们</a>|
+                <a href="#" target="_blank" title="帮助中心">帮助中心</a>|
+                <a href="#" target="_blank" title="资源下载">资源下载</a>|
                 <span>服务热线：1875xxxxxxx(上海) 1737xxxxxxx(北京)</span>
                 <span>Email：1310885336@qq.com</span>
               </section>
@@ -140,12 +140,12 @@
           <aside class="fl col-3 tac mt15">
             <section class="gf-tx">
               <span>
-                <img src="~/assets/img/wx-icon.png" alt/>
+                <img alt src="~/assets/img/wx-icon.png"/>
               </span>
             </section>
             <section class="gf-tx">
               <span>
-                <img src="~/assets/img/wb-icon.png" alt/>
+                <img alt src="~/assets/img/wb-icon.png"/>
               </span>
             </section>
           </aside>
