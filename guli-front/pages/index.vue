@@ -67,7 +67,7 @@
                       </span>
                       <span class="fr jgTag bg-green" v-else>
 
-                        <i class="c-fff fsize12 f-fA">{{ course.price }}</i>
+                        <i class="c-fff fsize12 f-fA">{{ course.price }}￥</i>
                       </span>
                       <span class="fl jgAttr c-ccc f-fA">
                         <i class="c-999 f-fA">{{ course.viewCount }}人观看</i>

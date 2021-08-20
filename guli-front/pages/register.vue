@@ -185,13 +185,22 @@ export default {
       // this.$refs["userForm"].validate((valid) => {
       //   if (valid) {
       registerApi.registerMember(this.params).then(resp => {
-        //提示
-        this.$message({
-          type: "success",
-          message: "注册成功"
-        })
-        //跳转
-        this.$router.push({path: '/login'})
+        console.log(resp)
+        if (resp.data.code !== 20000) {
+          this.$message({
+            message: resp.data.message,
+            type: 'error',
+            duration: 5 * 1000
+          })
+        } else {
+          //提示
+          this.$message({
+            type: "success",
+            message: "注册成功"
+          })
+          //跳转
+          this.$router.push({path: '/login'})
+        }
       })
     },
     //   });

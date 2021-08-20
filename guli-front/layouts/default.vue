@@ -32,39 +32,40 @@
           </ul>
           <!-- / nav -->
           <ul class="h-r-login">
-            <li id="no-login">
+            <li v-if="!loginInfo.id" id="no-login">
               <a href="/login" title="登录">
                 <em class="icon18 login-icon">&nbsp;</em>
                 <span class="vam ml5">登录</span>
               </a>
-              |
               <a href="/register" title="注册">
                 <span class="vam ml5">注册</span>
               </a>
             </li>
-            <li id="is-login-one" class="mr10 undis">
+            <li v-if="loginInfo.id" id="is-login-one" class="mr10">
               <a id="headerMsgCountId" href="#" title="消息">
                 <em class="icon18 news-icon">&nbsp;</em>
               </a>
               <q class="red-point" style="display: none">&nbsp;</q>
             </li>
-            <li id="is-login-two" class="h-r-user undis">
-              <a href="#" title>
+            <li v-if="loginInfo.id" id="is-login-two" class="h-r-user">
+              <a href="/ucenter" title>
                 <img
-                  alt
-                  class="vam picImg"
-                  height="30"
-                  src="~/assets/img/avatar-boy.gif"
+                  :src="loginInfo.avatar"
                   width="30"
+                  height="30"
+                  class="vam picImg"
+                  alt
                 />
-                <span id="userName" class="vam disIb"></span>
+                <span id="userName" class="vam disIb">{{
+                    loginInfo.nickname
+                  }}</span>
               </a>
               <a
-                class="ml5"
-                href="javascript:void(0)"
-                onclick="exit();"
+                href="javascript:void(0);"
                 title="退出"
-              >退出</a
+                @click="logout()"
+                class="ml5"
+              >退 出</a
               >
             </li>
             <!-- /未登录显示第1 li；登录后显示第2，3 li -->
@@ -161,6 +162,49 @@ import "~/assets/css/reset.css";
 import "~/assets/css/theme.css";
 import "~/assets/css/global.css";
 import "~/assets/css/web.css";
+import cookie from "js-cookie";
 
-export default {};
+export default {
+  data() {
+    return {
+      token: '',
+      loginInfo: {
+        id: "",
+        age: "",
+        avatar: "",
+        email: "",
+        nickname: "",
+        sex: "",
+      },
+    }
+  },
+  created() {
+    this.showInfo();
+  },
+  methods: {
+    //从cookie获取用户信息
+    showInfo() {
+      //从cookie获取用户信息
+      var userStr = cookie.get('guli_ucenter');
+      //后端传过来的都是字符串 需要把字符串转换成json "{'aa':20}"
+      //   console.log(userStr!=='undefined')
+      //判断是否为true 里面捕获一下异常 不然会报错
+      if (userStr) {
+        try {
+          this.loginInfo = JSON.parse(userStr)
+        } catch (e) {
+
+        }
+
+      }
+    },
+    //登出功能
+    logout() {
+      //没办法删cookie 只能在里面设置空值
+      cookie.set('guli_ucenter', '', {domain: 'localhost'})
+      cookie.set('guli_token', '', {domain: 'localhost'})
+      window.location.href = "/";
+    }
+  },
+}
 </script>

@@ -9,7 +9,7 @@ export default {
       data:userinfo
     })
   },
-  //登录
+  //根据token获取用户信息
   getLoginUserInfo(userinfo) {
     return request({
       url: `/serviceUcenter/member/getMemberInfo`,
