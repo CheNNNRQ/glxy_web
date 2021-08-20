@@ -9,19 +9,19 @@
       <el-form ref="userForm" :model="user">
         <el-form-item
           class="input-prepend restyle"
-          prop="mobile"
+          prop="email"
           :rules="[
             {
               required: true,
-              message: '请输入手机号码',
+              message: '请输入邮箱地址',
               trigger: 'blur',
             },
-            { validator: checkPhone, trigger: 'blur' },
+
           ]"
         >
           <div>
-            <el-input type="text" placeholder="手机号" v-model="user.mobile"/>
-            <i class="iconfont icon-phone"/>
+            <el-input type="text" placeholder="邮箱地址" v-model="user.email"/>
+            <i class="el-icon-message"/>
           </div>
         </el-form-item>
         <el-form-item
@@ -83,7 +83,7 @@ export default {
     return {
       user: {
         //封装用于登录的用户对象
-        mobile: "",
+        email: "",
         password: "",
       },
       //用于获取接口传来的token中的对象
@@ -91,33 +91,43 @@ export default {
     };
   },
   methods: {
+    //登录的方法
     submitLogin() {
-      loginApi.submitLogin(this.user).then((response) => {
-        if (response.data.success) {
-          //把token存在cookie中、也可以放在localStorage中
-          //参数1：cookie名称，参数2：具体的值，参数3：作用范围
-          cookie.set("guli_token1", response.data.data.token, {
-            domain: "localhost",
-          });
-          //登录成功根据token获取用户信息
-          loginApi.getLoginUserInfo().then((response) => {
-            this.loginInfo = response.data.data.userInfo;
-            //将用户信息记录cookie
-            cookie.set("guli_ucenter", this.loginInfo, {domain: "localhost"});
-            //跳转页面
+      // 1. 调用接口登录 返回token字符串
+      loginApi.submitLogin(this.user).then(resp => {
+        // 2. 获取token字符串放到cookie中
+        //参数1 给cookie的命名 参数二 给cookie放的值 参数三 作用范围只要是localhost都传递
+        cookie.set('guli_token', resp.data.data.token, {domain: 'localhost'})
+
+        // 3. 在utils.request中加上拦截器将token加到header中(如果有)
+        // 4.调用接口 根据token获取用户信息
+        loginApi.getLoginUserInfo().then(value => {
+          //获取返回用户信息,放到cookie中
+          this.loginInfo = value.data.data.userInfo
+          console.log(value.data.data)
+          //这里传的是一个对象不知道为什么老师直接就能加到cookie中 这里需要转成字符串不然会报错
+          cookie.set('guli_ucenter', JSON.stringify(this.loginInfo), {domain: 'localhost'})
+          if (cookie.get('guli_ucenter') !== 'undefined') {
+            //跳转到主页
             window.location.href = "/";
-            //this.$router.push({path:'/'})
-          });
-        }
-      });
+          }else {
+            //提示
+            this.$message({
+              type: "error",
+              message: "账号或密码不正确"
+            })
+          }
+          //5.在主页显示用户的信息 在layouts.default中
+        })
+      })
     },
-    checkPhone(rule, value, callback) {
-      //debugger
-      if (!/^1[34578]\d{9}$/.test(value)) {
-        return callback(new Error("手机号码格式不正确"));
-      }
-      return callback();
-    },
+    // checkPhone(rule, value, callback) {
+    //   //debugger
+    //   if (!/^1[34578]\d{9}$/.test(value)) {
+    //     return callback(new Error("手机号码格式不正确"));
+    //   }
+    //   return callback();
+    // },
   },
 };
 </script>
