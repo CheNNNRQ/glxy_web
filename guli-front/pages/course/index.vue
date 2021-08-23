@@ -101,7 +101,7 @@
                     <span class="fr jgTag bg-green" v-if="Number(item.price)===0">
                       <i class="c-fff fsize12 f-fA">免费</i>
                     </span>
-                    <span class="fr jgTag bg-green" v-else>
+                    <span class="fr jgTag bg-blue" v-else>
 
                         <i class="c-fff fsize12 f-fA">{{ item.price }}￥</i>
                     </span>
@@ -280,7 +280,8 @@ export default {
 
       //调用方法查询
       this.gotoPage(1)
-    },//8. 最新排序
+    },
+    //8. 最新排序
     searchGmtCreate() {
       //设置对应变量值，为了样式生效
       this.buyCountSort = ""
