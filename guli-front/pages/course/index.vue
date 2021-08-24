@@ -84,9 +84,10 @@
               <li v-for="item in data.list" :key="item.id">
                 <div class="cc-l-wrap">
                   <section class="course-img">
-                    <img :src="item.cover"
-                         class="img-responsive"
-                         :alt="item.title">
+                    <img
+                      :src="item.cover"
+                      class="img-responsive"
+                      :alt="item.title">
                     <div class="cc-mask">
                       <a :href="'/course/'+item.id" title="开始学习" class="comm-btn c-btn-1">开始学习</a>
                     </div>
@@ -103,7 +104,7 @@
                     </span>
                     <span class="fr jgTag bg-blue" v-else>
 
-                        <i class="c-fff fsize12 f-fA">{{ item.price }}￥</i>
+                        <i class="c-fff fsize12 f-fA">￥{{ item.price }}</i>
                     </span>
                     <span class="fl jgAttr c-ccc f-fA">
                       <i class="c-999 f-fA">{{ item.viewCount }}人观看</i>
@@ -246,11 +247,11 @@ export default {
       //清空二级查询
       this.searchObj.subjectId = undefined
       //一级样式失效
-      this.oneIndex= -1
+      this.oneIndex = -1
       //二级样式失效
-      this.twoIndex= -1
+      this.twoIndex = -1
       //二级列表清空
-      this.subSubjectList=[]
+      this.subSubjectList = []
       courseApi.getCourseList(1, 8, this.searchObj).then((resp) => {
         this.data = resp.data.data;
       });

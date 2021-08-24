@@ -13,6 +13,7 @@
         <article class="c-v-pic-wrap" style="height: 357px">
           <section class="p-h-video-box" id="videoPlay">
             <img
+              height=357px
               :src="course.cover"
               :alt="course.title"
               class="dis c-v-pic"
@@ -37,8 +38,11 @@
                 <a class="c-fff vam" title="收藏" href="#">收藏</a>
               </span>
             </section>
-            <section class="c-attr-mt">
-              <a href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+            <section class="c-attr-mt" v-if="isBuy || Number(course.price)===0">
+              <a  href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+            </section>
+            <section class="c-attr-mt" v-else>
+              <a @click="createOrders()" href="#" title="立即购买" class="comm-btn c-btn-3">立即购买</a>
             </section>
           </section>
         </aside>
@@ -301,6 +305,7 @@
 <script>
 import courseApi from "@/api/course";
 import comment from "@/api/commonedu";
+import ordersApi from "@/api/orders";
 
 export default {
   data() {
@@ -319,6 +324,8 @@ export default {
         teacherId: "",
       },
       isbuyCourse: false,
+      orderId: "",
+      isBuy:false
     };
   },
   created() {
@@ -333,35 +340,36 @@ export default {
       courseApi.getCourseInfo(this.course.courseId).then((resp) => {
         this.chapterList = resp.data.data.chapterVideoList;
         this.course = resp.data.data.courseWebVo;
-        // console.log(this.course)
+        this.isBuy = resp.data.data.isBuy;
+        console.log(this.isBuy)
       });
     },
     //评论初始化
     initComment() {
       console.log(this.course.courseId)
-      comment.getPageList(1, this.limit,this.$route.params.id).then(resp => {
+      comment.getPageList(1, this.limit, this.$route.params.id).then(resp => {
         this.data = resp.data.data.commentInfo
       })
     },
     //分页
     gotoPage(page) {
-      comment.getPageList(page,this.limit,this.$route.params.id).then(resp => {
+      comment.getPageList(page, this.limit, this.$route.params.id).then(resp => {
         this.data = resp.data.data.commentInfo
       })
     },
     //添加评论
-    addComment(){
+    addComment() {
       this.comment.courseId = this.$route.params.id;
-      console.log('11111111111111'+this.courseId)
+      console.log('11111111111111' + this.courseId)
       this.comment.teacherId = this.course.teacherId
-      console.log('1222222222222'+this.teacherId)
-      comment.addComment(this.comment).then(resp=>{
-        if (resp.data.success){
+      console.log('1222222222222' + this.teacherId)
+      comment.addComment(this.comment).then(resp => {
+        if (resp.data.success) {
           this.$message({
             type: "success",
             message: "评论成功!",
           });
-        }else{
+        } else {
           this.$message({
             type: "error",
             message: resp.data.message,
@@ -370,7 +378,19 @@ export default {
         this.comment.content = "";
         this.initComment();
       })
-    }
+    },
+    //生成订单
+    createOrders() {
+      console.log('111111'+this.$route.params.id)
+      ordersApi.createOrders(this.$route.params.id).then(resp => {
+        //获取返回的订单号
+        this.orderId = resp.data.data.orderId
+        console.log('1121'+this.orderId)
+        console.log('1131'+resp.data.data.orderId)
+        //生成订单后跳转订单页面
+        this.$router.push({path:'/orders/'+ this.orderId})
+      })
+    },
 
   },
 };
