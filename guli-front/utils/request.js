@@ -1,8 +1,9 @@
 import axios from 'axios'
 import cookie from "js-cookie";
+import {Message} from "element-ui";
 // 创建axios实例
 const service = axios.create({
-  baseURL: 'http://localhost:9001', // api的base_url
+  baseURL: 'http://localhost:8222', // api的base_url
   timeout: 20000 // 请求超时时间
 })
 // http request 拦截器
@@ -33,6 +34,7 @@ service.interceptors.response.use(
       if (response.data.code !== 20000) {
         //25000：订单支付中，不做任何提示
         if (response.data.code != 25000) {
+            console.log(response.data)
           Message({
             message: response.data.message || 'error',
             type: 'error',
