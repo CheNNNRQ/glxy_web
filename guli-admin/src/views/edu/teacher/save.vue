@@ -87,7 +87,7 @@ export default {
         level: 1,
         career: "",
         intro: "",
-        avatar: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/05/0937f75b67c740e1b2b08bafee9d0643file.png",
+        avatar: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/28/086661239b10428d9e986822cbc8e92eA08F70477B8B451CA618F8435185BA0B.jpg",
       },
       //上传弹框组件是否显示
       imagecropperShow: false,
@@ -129,7 +129,9 @@ export default {
         //调用根据id查询的方法
         this.getInfoById(id);
       } else {
-        this.teacher = {};
+        this.teacher = {
+          avatar: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/28/086661239b10428d9e986822cbc8e92eA08F70477B8B451CA618F8435185BA0B.jpg"
+        };
       }
     },
     //修改讲师的方法
@@ -141,7 +143,7 @@ export default {
           type: "success",
         });
         //回到讲师列表 路由跳转
-        this.$router.push({path: "/teacher/table"});
+        this.$router.push({path: "/edu/teacher/list"});
       });
     },
 
@@ -175,7 +177,7 @@ export default {
           type: "success",
         });
         //回到讲师列表 路由跳转
-        this.$router.push({path: "/teacher/table"});
+        this.$router.push({path: "/edu/teacher/list"});
       });
     },
     handleChange(value) {
