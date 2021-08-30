@@ -21,7 +21,7 @@
         />
       </el-form-item>
 
-      <!-- 所属分类 TODO -->
+
       <el-form-item label="课程分类">
         <el-select
           v-model="courseInfo.subjectParentId"
@@ -47,7 +47,7 @@
         </el-select>
       </el-form-item>
 
-      <!-- 课程讲师 TODO -->
+
       <!-- 课程讲师 -->
       <el-form-item label="课程讲师">
         <el-select v-model="courseInfo.teacherId" placeholder="请选择">
@@ -69,13 +69,13 @@
         />
       </el-form-item>
 
-      <!-- 课程简介 TODO -->
+
       <!-- 课程简介-->
       <el-form-item label="课程简介">
         <tinymce :height="300" v-model="courseInfo.description"/>
       </el-form-item>
 
-      <!-- 课程封面 TODO -->
+
       <!-- 课程封面-->
       <el-form-item label="课程封面">
         <el-upload
@@ -130,7 +130,7 @@ export default {
         teacherId: "",
         lessonNum: 0,
         description: "",
-        cover: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/09/a6955f1708b34829925a1e33199332d603DD07B46CBF3F9EA9BE35CB060861CB.jpg",
+        cover: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/30/91e86b1b270a4de3a541654e17dfead01442295581911.jpg",
         price: 0,
       },
       courseId: "",

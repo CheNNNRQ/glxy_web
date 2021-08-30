@@ -87,7 +87,7 @@ export default {
         level: 1,
         career: "",
         intro: "",
-        avatar: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/28/086661239b10428d9e986822cbc8e92eA08F70477B8B451CA618F8435185BA0B.jpg",
+        avatar: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/30/8f9f31eb3aea4234887c4ae7e4bf99c803DD07B46CBF3F9EA9BE35CB060861CB.jpg",
       },
       //上传弹框组件是否显示
       imagecropperShow: false,
@@ -130,7 +130,7 @@ export default {
         this.getInfoById(id);
       } else {
         this.teacher = {
-          avatar: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/28/086661239b10428d9e986822cbc8e92eA08F70477B8B451CA618F8435185BA0B.jpg"
+          avatar: "https://diodi-college.oss-cn-beijing.aliyuncs.com/2021/08/30/8f9f31eb3aea4234887c4ae7e4bf99c803DD07B46CBF3F9EA9BE35CB060861CB.jpg"
         };
       }
     },

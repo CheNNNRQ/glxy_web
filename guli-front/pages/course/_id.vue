@@ -47,7 +47,7 @@
           </section>
         </aside>
         <aside class="thr-attr-box">
-          <ol class="thr-attr-ol clearfix">
+          <ol class="thr-attr-ol ">
             <li>
               <p>&nbsp;</p>
               <aside>
@@ -119,13 +119,24 @@
                             </a>
                             <ol class="lh-menu-ol" style="display: block">
                               <li class="lh-menu-second ml30" v-for="video in chapter.children" :key="video.id">
-                                <a :href="'/player/'+video.videoSourceId" title>
+                                <a v-if="video.videoSourceId !== '' && isBuy || Number(course.price)===0 " :href="'/player/'+video.videoSourceId" title>
                                   <span class="fr">
-                                    <i class="free-icon vam mr10">免费试听</i>
+                                    <i class="free-icon vam mr10">观看视频</i>
                                   </span>
-                                  <em class="lh-menu-i-2 icon16 mr5">&nbsp;</em
+                                  <em  class="lh-menu-i-2 icon16 mr5">&nbsp;</em
                                   >{{ video.title }}
                                 </a>
+                                <a  @click="noBuyVideo()" href="#" v-else title>
+                                  <span class="fr" v-if="video.videoSourceId === ''">
+                                    <i class="free-icon1 vam mr10">暂无视频</i>
+                                  </span>
+                                  <span class="fr" v-else>
+                                    <i class="free-icon vam mr10">免费试听</i>
+                                  </span>
+                                  <em  class="lh-menu-i-2 icon16 mr5">&nbsp;</em
+                                  >{{ video.title }}
+                                </a>
+
                               </li>
                             </ol>
                           </li>
@@ -149,7 +160,7 @@
                 <ul style="height: auto">
                   <li>
                     <div class="u-face">
-                      <a href="#">
+                      <a :href="'/teacher/'+course.teacherId">
                         <img
                           :src="course.avatar"
                           width="50"
@@ -159,7 +170,7 @@
                       </a>
                     </div>
                     <section class="hLh30 txtOf">
-                      <a class="c-333 fsize16 fl" href="#">{{ course.teacherName }}</a>
+                      <a class="c-333 fsize16 fl" :href="'/teacher/'+course.teacherId">{{ course.teacherName }}</a>
                     </section>
                     <section class="hLh20 txtOf">
                       <span class="c-999">{{ course.intro }}</span>
@@ -341,7 +352,7 @@ export default {
         this.chapterList = resp.data.data.chapterVideoList;
         this.course = resp.data.data.courseWebVo;
         this.isBuy = resp.data.data.isBuy;
-        console.log(this.isBuy)
+        console.log('111'+this.course.teacherId)
       });
     },
     //评论初始化
@@ -391,7 +402,12 @@ export default {
         this.$router.push({path:'/orders/'+ this.orderId})
       })
     },
-
+    noBuyVideo(){
+      this.$message({
+        type: "error",
+        message: "用户未登录或还未购买此课程或者暂无该视频",
+      });
+    }
   },
 };
 </script>

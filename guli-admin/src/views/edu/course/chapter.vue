@@ -53,7 +53,6 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="上传视频">
-          <!-- TODO -->
           <el-upload
             :on-success="handleVodUploadSuccess"
             :on-remove="handleVodRemove"
@@ -179,6 +178,7 @@ export default {
     },
     next() {
       //跳转到第三步
+      console.log(this.courseId)
       this.$router.push({path: "/course/publish/" + this.courseId});
     },
     //根据课程id查询对应的课程章节和小结
@@ -270,9 +270,7 @@ export default {
       this.video.videoSourceId = response.data.videoId;
       this.video.videoOriginalName = file.name;
     },
-    beforeVodRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
-    },
+
     //点击x调用的这个方法
     beforeVodRemove(file, fileList) {
       return this.$confirm(`确定移除${file.name}?`);
@@ -368,7 +366,6 @@ export default {
     },
   },
 };
-</script>
 </script>
 <style scoped>
 .chanpterList {

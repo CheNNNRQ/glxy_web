@@ -77,7 +77,7 @@ export default {
             type: "success",
           });
           //跳转课程列表页面
-          this.$router.push({path: "/course/list"});
+          this.$router.push({path: "/edu/course/list"});
         });
       });
     },
