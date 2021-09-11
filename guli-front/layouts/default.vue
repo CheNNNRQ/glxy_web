@@ -201,6 +201,7 @@ export default {
     wxLogin(){
       //把token放到cookie中
       console.log(this.token)
+      // cookie.set('guli_token',this.token,{domain:'.nihaochilema.vaiwan.com'})
       cookie.set('guli_token',this.token,{domain:'localhost'})
       cookie.set('guli_ucenter','',{domain:'localhost'})
       console.log('1111111111111'+cookie.get('guli_token'))
